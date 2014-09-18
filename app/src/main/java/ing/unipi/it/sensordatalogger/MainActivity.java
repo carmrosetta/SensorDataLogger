@@ -2,6 +2,7 @@ package ing.unipi.it.sensordatalogger;
 
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.SensorManager;
@@ -19,7 +20,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-
+    NotificationManager notificationManager;
 
     //TODO possibilità di scegliere quali sensori attivare tra quelli disponibili e scegliere la frequenza di campionamento per ciascun sensore
 
@@ -146,15 +147,29 @@ public class MainActivity extends Activity {
         }
     }
 
+    public void stopSampling(View v) {
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.cancelAll();
+        SensorsSamplingService.serviceRunning = false;
+        stopService(new Intent(getApplicationContext(), SensorsSamplingService.class));
+
+        finish();
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-
-
-        initGUI();
+        if(!SensorsSamplingService.serviceRunning) {
+            setContentView(R.layout.activity_main);
+            initGUI();
+        }
+        else {
+            setContentView(R.layout.activity_stop_sampling);
+        }
 
 
     }

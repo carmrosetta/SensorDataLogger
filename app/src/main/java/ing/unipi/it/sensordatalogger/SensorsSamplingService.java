@@ -23,6 +23,8 @@ import android.util.Log;
 
 public class SensorsSamplingService extends Service implements SensorEventListener {
 
+    public static boolean serviceRunning = false;
+
     public static final int SCREEN_OFF_RECEIVER_DELAY = 500;
 
     SavingSamplesTimer timer;
@@ -77,6 +79,8 @@ public class SensorsSamplingService extends Service implements SensorEventListen
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        serviceRunning = true ;
 
        /* timer = new SavingSamplesTimer(interval, 1000);
 
@@ -281,7 +285,7 @@ public class SensorsSamplingService extends Service implements SensorEventListen
 
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        Utilities.showNotification(this, notificationManager, "Service running", StopSamplingActivity.class);
+        Utilities.showNotification(this, notificationManager, "Service running", MainActivity.class);
 
 
     }

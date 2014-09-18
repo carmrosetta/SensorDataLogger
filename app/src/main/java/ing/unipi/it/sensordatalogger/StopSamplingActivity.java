@@ -23,6 +23,7 @@ public class StopSamplingActivity extends Activity {
     public void stopSampling(View v) {
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.cancelAll();
+
         stopService(new Intent(getApplicationContext(), SensorsSamplingService.class));
 
         finish();
