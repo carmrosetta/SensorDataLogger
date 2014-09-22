@@ -29,4 +29,10 @@ public class StopSamplingActivity extends Activity {
         finish();
     }
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
