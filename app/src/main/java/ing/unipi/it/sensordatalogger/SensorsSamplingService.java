@@ -425,7 +425,7 @@ public class SensorsSamplingService extends Service implements SensorEventListen
                     registerListeners();
                     notificationManager.cancelAll();
                     notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                    Utilities.showNotification(getApplicationContext(), notificationManager, "Service running", StopSamplingActivity.class);
+                    Utilities.showNotification(getApplicationContext(), notificationManager, "Service running", MainActivity.class);
 
                 }
             };
